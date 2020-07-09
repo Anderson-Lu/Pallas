@@ -2,48 +2,58 @@ package dns
 
 import (
 	"fmt"
-	"net"
-	"time"
-	"strings"
 	"io/ioutil"
+	"net"
+	"strings"
+	"time"
 
-	"github.com/likexian/whois-parser-go"
+	whoisparser "github.com/likexian/whois-parser-go"
 )
 
 const (
-	IANA_WHOIS_SERVER = "whois.iana.org"
+	IANA_WHOIS_SERVER  = "whois.iana.org"
 	DEFAULT_WHOIS_PORT = "43"
 )
 
 func WhoisBeautifyCN(domain string, servers ...string) (map[string]interface{}, error) {
-	raw, err := WhoisBeautify(domain,servers...)
+	raw, err := WhoisBeautify(domain, servers...)
 	if err != nil {
 		return nil, err
 	}
-	var ret = make(map[string]interface{},0)
-	ret["所有者"] = raw.Registrant.Name
-	ret["所有者联系邮箱"] = raw.Registrant.Email
-	ret["注册机构"] = raw.Registrant.Organization
-	ret["注册商"] = raw.Registrar.Name
-	ret["注册日期"] = raw.Domain.CreatedDate
-	ret["到期日期"] = raw.Domain.ExpirationDate
-	ret["更新时间"] = raw.Domain.UpdatedDate
-	ret["域名状态"] = raw.Domain.Status
-	ret["DNS服务器"] = raw.Domain.NameServers
-	ret["所在国家"] = raw.Registrant.Country
-	ret["所在省"] = raw.Registrant.Province
-	ret["所在城市"] = raw.Registrant.City
-	return ret,nil
+	var ret = make(map[string]interface{}, 0)
+
+	if raw.Registrar != nil {
+		ret["注册商"] = raw.Registrar.Name
+	}
+
+	if raw.Domain != nil {
+		ret["注册日期"] = raw.Domain.CreatedDate
+		ret["到期日期"] = raw.Domain.ExpirationDate
+		ret["更新时间"] = raw.Domain.UpdatedDate
+		ret["域名状态"] = raw.Domain.Status
+		ret["DNS服务器"] = raw.Domain.NameServers
+	}
+
+	if raw.Registrant != nil {
+		ret["所有者"] = raw.Registrant.Name
+		ret["所有者联系邮箱"] = raw.Registrant.Email
+		ret["注册机构"] = raw.Registrant.Organization
+		ret["所在国家"] = raw.Registrant.Country
+		ret["所在省"] = raw.Registrant.Province
+		ret["所在城市"] = raw.Registrant.City
+	}
+
+	return ret, nil
 }
 
-func WhoisBeautify(domain string, servers ...string) (*whoisparser.WhoisInfo,error) {
-	raw, err := Whois(domain,servers...)
+func WhoisBeautify(domain string, servers ...string) (*whoisparser.WhoisInfo, error) {
+	raw, err := Whois(domain, servers...)
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
 	result, err := whoisparser.Parse(raw)
-	return &result,nil
+	return &result, nil
 }
 
 // Whois do the whois query and returns whois info
