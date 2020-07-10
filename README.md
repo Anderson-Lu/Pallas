@@ -20,7 +20,10 @@ Pallas is a network toolbox that helps you troubleshoot some network security is
 |command|description|
 |---|---|
 |dnslookup|Query all records of a domain name, including A/AAAA/PTR/MX/NS and other records.|
+|iplookup|Query IP info.|
 |whois|Whois query the transfer protocol of the domain name's IP and owner information.|
+|scan|ARP/ICMP Scanner.|
+
 
 ## Getting Started
 
@@ -100,6 +103,38 @@ whois: start fetching information for  baidu.com
 +----------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
 | 所在城市       |                                                                                                                                                 |
 +----------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+```
+
+### Lookup IP
+
+IP query tool, including gathering local ip, public ip and detail for target ip.
+
+command:
+
+```
+pallas iplookup [--ip]
+```
+
+example:
+
+```shell
+➜  Pallas git:(master) ✗ go run main.go iplookup
++----------------------------------+-----------------------+
+|            ATTRIBUTE             |         VALUE         |
++----------------------------------+-----------------------+
+| Local IP                         | 10.0.2.15             |
+|                                  | 172.17.0.1            |
++----------------------------------+-----------------------+
+| Public IP(From myexternalip.com) | 211.123.126.33         |
++----------------------------------+-----------------------+
+| Public IP(From Dns Server)       | 10.0.2.15             |
++----------------------------------+-----------------------+
+| Mac                              | 03:00:27:0e:61:8d     |
++----------------------------------+-----------------------+
+| Mask                             | ffff0000              |
++----------------------------------+-----------------------+
+| IP Range                         | 10.0.2.1 ~ 10.0.2.254 |
++----------------------------------+-----------------------+
 ```
 
 # Run 

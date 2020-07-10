@@ -14,7 +14,7 @@ var (
 var dnsCmd = &cobra.Command{
 	Use:   "dnslookup [domain]",
 	Short: "DNS record query tool",
-	Long:  "dnslook is a dns query tool to help you query the dns records of a domain name",
+	Long:  buildLongDesc("dnslook is a dns query tool to help you query the dns records of a domain name"),
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			fmt.Println("[error] no domain found, use `dnstool --help` for more infomation")

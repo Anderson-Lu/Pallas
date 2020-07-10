@@ -17,7 +17,7 @@ var whoisCmd = &cobra.Command{
 	Version: "v1.0",
 	Use:     "whois",
 	Short:   "whois query domain name or IP attribution information",
-	Long:    "whois query domain name or IP attribution information",
+	Long:    buildLongDesc("whois query domain name or IP attribution information"),
 	Example: "whois baidu.com --beautify true",
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {

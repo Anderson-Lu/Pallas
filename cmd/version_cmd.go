@@ -16,7 +16,7 @@ Github     :  https://github.com/Anderson-Lu/Pallas
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print Pallas version",
-	Long:  "",
+	Long:  buildLongDesc(""),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(longDesc)
 		fmt.Println(versionTxt)

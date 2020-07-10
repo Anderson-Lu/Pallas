@@ -32,10 +32,18 @@ var rootCmd = &cobra.Command{
 	},
 }
 
+func buildLongDesc(desc string) string {
+	return fmt.Sprintf("%s\n\n%s", longDesc, desc)
+}
+
 func Execute() {
+
 	rootCmd.AddCommand(dnsCmd)
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(whoisCmd)
+	rootCmd.AddCommand(cmdCmd)
+	rootCmd.AddCommand(scanCmd)
+
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
