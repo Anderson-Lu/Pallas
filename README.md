@@ -20,15 +20,15 @@ Pallas is a network toolbox that helps you troubleshoot some network security is
 |command|description|
 |---|---|
 |[dnslookup](./doc/doc_dns_lookup.md)|Query all records of a domain name, including A/AAAA/PTR/MX/NS and other records.|
-|iplookup|Query IP info.|
-|whois|Whois query the transfer protocol of the domain name's IP and owner information.|
+|[iplookup](./doc/doc_ip_lookup.md)|Query IP info.|
+|[whois](./doc/doc_whois.md)|Whois query the transfer protocol of the domain name's IP and owner information.|
 |scan|ARP/ICMP Scanner.|
 
 ## Features
 
 - [DNS] Find DNS records(A/AAAA/PTR/MX/CNAME)
 - [IP] Find the IP location
-- [Whois] Find registration information for ip or domain name
+- [Whois] Find registration information for ip or domain name   
 - [ARP] ARP intranet scanning
 - [ICMP] ICMP host online detection
 

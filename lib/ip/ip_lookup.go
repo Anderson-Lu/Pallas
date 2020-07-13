@@ -122,7 +122,9 @@ func GetLocalIPMaskAndMac() (mask, mac string, e error) {
 			if ip.IP.To4() != nil {
 				mask = ip.Mask.String()
 				it, _ := net.InterfaceByIndex(i)
-				mac = it.HardwareAddr.String()
+				if it != nil {
+					mac = it.HardwareAddr.String()
+				}
 				continue
 			}
 		}
